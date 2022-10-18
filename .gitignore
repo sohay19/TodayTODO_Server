@@ -44,9 +44,6 @@
 # *.iml
 # *.ipr
 
-#Folder
-build/
-
 # CMake
 cmake-build-*/
 

@@ -8,10 +8,6 @@ group = 'com.bailey'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-bootJar {
-    destinationDirectory = file("./target")
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
