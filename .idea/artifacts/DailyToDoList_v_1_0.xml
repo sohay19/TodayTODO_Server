@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="DailyToDoList_v.1.0">
-    <output-path>$PROJECT_DIR$/out/artifacts</output-path>
-    <root id="archive" name="DailyToDoList_v.1.0.war" />
-  </artifact>
-</component>
