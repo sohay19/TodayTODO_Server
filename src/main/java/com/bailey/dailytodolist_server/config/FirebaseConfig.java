@@ -7,8 +7,10 @@ import com.google.firebase.database.*;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.FileInputStream;
 
 @Configuration
@@ -19,7 +21,9 @@ public class FirebaseConfig {
     // 앱 실행 후 바로 시작하는 함수를 지칭한다.
     @PostConstruct
     public void init() {
-        FileInputStream serviceAccount = new FileInputStream("src/main/resources/dailytodolist-57076-firebase-adminsdk-bbc2a-9637753538.json");
+        File file = ResourceUtils.getFile("src/main/resources/dailytodolist-57076-firebase-adminsdk-bbc2a-9637753538.json");
+
+        FileInputStream serviceAccount = new FileInputStream(file);
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl("https://dailytodolist-57076-default-rtdb.firebaseio.com/")
