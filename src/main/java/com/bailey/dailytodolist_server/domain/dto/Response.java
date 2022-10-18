@@ -11,4 +11,8 @@ public class Response {
     private boolean success;
     private String result;
     private String message;
+
+    public Response(boolean isSuccess) {
+        this.success = isSuccess;
+    }
 }

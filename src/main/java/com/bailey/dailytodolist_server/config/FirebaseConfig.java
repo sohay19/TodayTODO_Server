@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.*;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
@@ -17,6 +18,7 @@ import java.io.InputStream;
 
 @Configuration
 @NoArgsConstructor
+@Slf4j
 public class FirebaseConfig {
     @SneakyThrows
     // 앱 실행 후 바로 시작하는 함수를 지칭한다.
@@ -36,7 +38,7 @@ public class FirebaseConfig {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 Object data = snapshot.getValue();
-                System.out.println(data);
+                log.info("data = {}", data);
             }
 
             @Override

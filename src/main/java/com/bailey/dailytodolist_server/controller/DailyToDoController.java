@@ -20,6 +20,11 @@ public class DailyToDoController {
     // PUT : 업데이트 (단일)
     // DELETE : 삭제
 
+    @GetMapping("/")
+    public Response healthCheck() {
+        return new Response(true);
+    }
+
     @GetMapping("/message/send")
     public Response sendMassage() {
         pushService.silentPush();
