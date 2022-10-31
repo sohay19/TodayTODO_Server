@@ -1,7 +1,6 @@
 package com.bailey.dailytodolist_server.controller;
 
 
-import com.bailey.dailytodolist_server.config.FirebaseConfig;
 import com.bailey.dailytodolist_server.domain.dto.Response;
 import com.bailey.dailytodolist_server.service.PushService;
 import com.bailey.dailytodolist_server.service.RealtimeDatabaseService;

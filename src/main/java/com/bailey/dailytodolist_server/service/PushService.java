@@ -1,13 +1,10 @@
 package com.bailey.dailytodolist_server.service;
 
-import com.bailey.dailytodolist_server.config.FirebaseConfig;
 import com.google.firebase.messaging.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
