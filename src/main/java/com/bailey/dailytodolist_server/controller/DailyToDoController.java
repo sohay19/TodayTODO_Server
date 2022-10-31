@@ -1,12 +1,14 @@
 package com.bailey.dailytodolist_server.controller;
 
 
+import com.bailey.dailytodolist_server.config.FirebaseConfig;
 import com.bailey.dailytodolist_server.domain.dto.Response;
 import com.bailey.dailytodolist_server.service.PushService;
 import com.bailey.dailytodolist_server.service.RealtimeDatabaseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor // 필수 매개변수가 있는 생성자를 만들어준다.
@@ -25,17 +27,19 @@ public class DailyToDoController {
         return new Response(true);
     }
 
-    @GetMapping("/message/send")
-    public Response sendMassage() {
-        pushService.silentPush();
+    //push test
+    @GetMapping("/push/send")
+    public Response sendPush() {
+        pushService.defaultPush();
 
-        return new Response(true, "silent", "Success");
+        return new Response(true, "", "");
     }
 
-    @GetMapping("/token/send")
-    public Response pushToken() {
-        realtimeDBService.pushToken();
+    //토큰 등록을 위해 호출
+    @PostMapping("/token/send")
+    public Response pushToken(@RequestBody Map<String, String> data) {
+        realtimeDBService.pushToken(data);
 
-        return new Response(true, "token", "Success");
+        return new Response(true, "", "");
     }
 }
