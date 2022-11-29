@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -20,17 +21,18 @@ import java.util.List;
 @Setter
 public class PushService {
     private final RealtimeDatabaseService realtimeDBService;
-    private List<String> tokenList = new ArrayList<>();
-
+//    private List<String> tokenList = new ArrayList<>();
 
     //SilentPush 스케줄링 12시간마다
-    @Scheduled(cron = "0 0 0/12 * * *")
-    public void sendSilentPush() {
-        silentPush();
-    }
+//    @Scheduled(cron = "0 0 0/12 * * *")
+//    public void sendSilentPush() {
+//        silentPush();
+//    }
 
     //SilentPush
     private void silentPush() {
+        ArrayList<String> tokenList = realtimeDBService.loadToken();
+
         ApnsConfig config = ApnsConfig.builder()
                 .setAps(Aps.builder().setContentAvailable(true).build())
                 .build();
@@ -52,8 +54,13 @@ public class PushService {
         }
     }
 
-    //일반 푸시 test
-    public void defaultPush() {
+    //전체 푸쉬
+    public void defaultPush(Map<String, String> data) {
+        ArrayList<String> tokenList = realtimeDBService.loadToken();
+
+        String title = data.get("title");
+        String body = data.get("body");
+
         ApnsConfig config = ApnsConfig.builder()
                 .setAps(Aps.builder()
                         .setSound("default")
@@ -64,8 +71,8 @@ public class PushService {
         MulticastMessage messages = MulticastMessage.builder()
                 .setApnsConfig(config)
                 .setNotification(Notification.builder()
-                        .setTitle("알림")
-                        .setBody("메세지")
+                        .setTitle(title)
+                        .setBody(body)
                         .build())
                 .addAllTokens(tokenList)
                 .build();

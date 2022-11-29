@@ -7,6 +7,7 @@ import com.bailey.dailytodolist_server.service.RealtimeDatabaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -26,19 +27,29 @@ public class DailyToDoController {
         return new Response(true);
     }
 
-    //push test
-    @GetMapping("/push/send")
-    public Response sendPush() {
-        pushService.defaultPush();
+    /* PUSH */
+    @PostMapping("/push/send")
+    public Response sendPush(@RequestBody Map<String, String> data) {
+        pushService.defaultPush(data);
 
-        return new Response(true, "", "");
+        return new Response(true);
     }
 
+    /* DB */
     //토큰 등록을 위해 호출
     @PostMapping("/token/send")
     public Response pushToken(@RequestBody Map<String, String> data) {
-        realtimeDBService.pushToken(data);
+        String uuid = data.get("uuid");
+        String token = data.get("token");
 
-        return new Response(true, "", "");
+        realtimeDBService.pushToken(uuid, token);
+
+        return new Response(true);
+    }
+    @GetMapping("/notice")
+    public Response getNotice() {
+        Map<String, String> noticeList = realtimeDBService.loadNotice();
+
+        return new Response(true, noticeList, "notice");
     }
 }
