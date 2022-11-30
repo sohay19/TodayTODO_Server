@@ -46,10 +46,36 @@ public class DailyToDoController {
 
         return new Response(true);
     }
+    //Notice
     @GetMapping("/notice")
     public Response getNotice() {
-        Map<String, String> noticeList = realtimeDBService.loadNotice();
+        Map<String, Map<String, String>> noticeList = realtimeDBService.loadNotice();
 
         return new Response(true, noticeList, "notice");
+    }
+    @PostMapping("/notice/send")
+    public Response pushNotice(@RequestBody Map<String, String> data) {
+        String title = data.get("title");
+        String body = data.get("body");
+
+        realtimeDBService.pushNotice(title, body);
+
+        return new Response(true);
+    }
+    //FAQ
+    @GetMapping("/faq")
+    public Response getFAQ() {
+        Map<String, Map<String, String>> faqList = realtimeDBService.loadFAQ();
+
+        return new Response(true, faqList, "faq");
+    }
+    @PostMapping("/faq/send")
+    public Response pushFAQ(@RequestBody Map<String, String> data) {
+        String title = data.get("title");
+        String body = data.get("body");
+
+        realtimeDBService.pushFAQ(title, body);
+
+        return new Response(true);
     }
 }

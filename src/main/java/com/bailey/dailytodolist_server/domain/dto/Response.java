@@ -11,7 +11,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class Response {
     private boolean success;
-    private Map<String, String> result;
+    private Map<String, Map<String, String>> result;
     private String message;
 
     public Response(boolean isSuccess) {
