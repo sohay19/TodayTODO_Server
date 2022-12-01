@@ -1,10 +1,7 @@
 package com.bailey.dailytodolist_server.service;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.database.*;
 import lombok.RequiredArgsConstructor;
@@ -76,7 +73,7 @@ public class RealtimeDatabaseService {
         map.put("body", body);
         Map<String, Map<String, String>> data = new HashMap<>();
         data.put(String.valueOf(index), map);
-        docRef.set(data);
+        docRef.set(data, SetOptions.merge());
     }
 
     /* FAQ */
@@ -109,6 +106,6 @@ public class RealtimeDatabaseService {
         map.put("body", body);
         Map<String, Map<String, String>> data = new HashMap<>();
         data.put(String.valueOf(index), map);
-        docRef.set(data);
+        docRef.set(data, SetOptions.merge());
     }
 }
