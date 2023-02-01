@@ -21,13 +21,6 @@ import java.util.Map;
 @Setter
 public class PushService {
     private final RealtimeDatabaseService realtimeDBService;
-//    private List<String> tokenList = new ArrayList<>();
-
-    //SilentPush 스케줄링 12시간마다
-//    @Scheduled(cron = "0 0 0/12 * * *")
-//    public void sendSilentPush() {
-//        silentPush();
-//    }
 
     //SilentPush
     private void silentPush() {
@@ -64,7 +57,7 @@ public class PushService {
         ApnsConfig config = ApnsConfig.builder()
                 .setAps(Aps.builder()
                         .setSound("default")
-                        .setCategory("DailyTODO")
+                        .setCategory("TodayTODO")
                         .build())
                 .build();
 
